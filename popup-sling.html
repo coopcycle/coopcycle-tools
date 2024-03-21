@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h3>CoopCycle Tools</h3>
+        <hr />
+        <p style="font-weight: bold">Sling export</p> 
+        <form>
+            <p><label for="from">From:</label>
+                <input type="date" id="from" /></p>
+            <p><label for="to">To:</label>
+                <input type="date" id="to" /></p>
+
+            <div>Export template</div>
+            <div><input type="radio" id="per_day" name="export-template" value="per_day" checked> <label for="per_day">Per day</label></div>
+            <div>
+                <input type="radio" id="per_x_min" name="export-template" value="per_x_min">
+                <label for="per_x_min">Per <input type="number" id="per_x_min" value="15" style="width: 5ch;" min="10"> min</label>
+            </div>
+            <p><button id="export">Export</button></p>
+        </form>
+    </body>
+</html>
