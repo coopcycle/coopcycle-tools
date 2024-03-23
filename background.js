@@ -39,5 +39,33 @@ chrome.runtime.onMessage.addListener(function(request, _sender, sendResponse) {
                 mode: 'no-cors'
             }).then(res => res.json()).then(json => sendResponse(json));
             return true;
+
+        case "setPopup":
+            chrome.action.setPopup({popup: request.popup});
+            return true;
+        case "openPopup":
+            if (typeof chrome.action.openPopup === 'function') {
+                chrome.action.openPopup();
+            } else {
+                chrome.tabs.create({url: request.url})
+            }
+            return true;
     }
 });
+
+function route(url) {
+    if (new RegExp('/app.getsling.com\/shifts').test(url)) {
+        chrome.action.setPopup({popup: "./popup-sling.html"});
+    } else {
+        chrome.action.setPopup({popup: "./popup-default.html"});
+    }
+}
+
+chrome.tabs.onActivated.addListener(async function(activeInfo) {
+    const tabInfos = await chrome.tabs.get(activeInfo.tabId)
+    route(tabInfos.url)
+});
+
+chrome.tabs.onUpdated.addListener(function(_tabId, _changeInfo, tab) {
+    route(tab.url)
+})

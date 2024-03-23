@@ -33,8 +33,30 @@ const utils = {
                 reject(err);
             }
         })
-    }
+    },
 
-    
+    setPopup: function (popup) {
+        return new Promise ((resolve, reject) => {
+            try {
+                chrome.runtime.sendMessage({type: "setPopup", popup}, function(response) {
+                    resolve(response)
+                })
+            } catch (err) {
+                reject(err);
+            }
+        })
+    },
+
+    openPopup: function (url) {
+        return new Promise ((resolve, reject) => {
+            try {
+                chrome.runtime.sendMessage({type: "openPopup", url}, function(response) {
+                    resolve(response)
+                })
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
 }
 
