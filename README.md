@@ -1,12 +1,13 @@
+# CoopCycle Tools
+---
+
 ## Sling flow
 
-There is 3 token needed to authorize Sling:
-- Oauth client id
-- Oauth client secret
-- Sling authorisation token (from the user)
+1. Login to https://app.sling.com
+2. When navigating to the shifts page, click on the "Export CSV" button in the top right.
+3. A popup will appear prompting for some details about the export format.
+4. Click export.
 
-1. The addon collect the Auth cookie from Sling
-2. Forward the auth to coopcycle
-3. CoopCycle server create the oauth client with the right redirect url and store the id and secret.
-4. Then we authorize the client to use our server by calling the `api.getsling.com/authorize`
-
+Behing the scene, the "Export CSV" is injected by this plugin.
+When you click on "Export", the authorizaion token is grabbed from your browser and forwarded to a API hosted at https://coopcycle.antoinebagnaud.me
+The API fetch all the data from Sling with your authorization token, then convert it into CSV.
